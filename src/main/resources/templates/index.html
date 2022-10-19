@@ -6,5 +6,18 @@
 </head>
 <body>
 
+<form th:action="@{/login}" method="post" th:object="${userForm}">
+
+	<p>メールアドレス<br>
+		<input type="text" name="mail" th:field="*{mail}"> 
+	</p>
+	
+	<p>パスワード (半角数字6文字以上)<br>
+		<input type="text" name="pass" th:field="*{pass}"> 
+	</p>
+	
+	<input type="submit" value="完了">
+</form>
+
 </body>
 </html>
