@@ -1,5 +1,9 @@
 package com.example.demo.form;
 
-public class UserForm {
+import lombok.Data;
 
+@Data
+public class UserForm {
+	private String mail;
+	private String pass;
 }
