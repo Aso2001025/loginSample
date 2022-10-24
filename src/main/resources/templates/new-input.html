@@ -5,7 +5,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form th:action="@{/new}" method="post" th:object="${userForm}">
+<form th:action="@{/new}" method="post" th:object="${inputForm}">
 
 	<p>メールアドレス<br>
 		<input type="text" name="mail" th:field="*{mail}"> 
@@ -18,6 +18,13 @@
 	<p>パスワード (半角数字6文字以上)<br>
 		<input type="text" name="pass" th:field="*{pass}"> 
 	</p>
+	
+	<p>確認用パスワード (半角数字6文字以上)<br>
+		<input type="text" name="pass" th:field="*{comPass}"> 
+	</p>
+	<ul th:if="${#fields.hasErrors('*')}">
+		<li th:each="err:${#fields.errors('*')}" th:text="${err}"></li>
+	</ul>
 	
 	<input type="submit" value="アカウント作成">
 </form>
