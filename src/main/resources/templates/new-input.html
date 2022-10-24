@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form th:action="@{/new}" method="post" th:object="${userForm}">
+
+	<p>メールアドレス<br>
+		<input type="text" name="mail" th:field="*{mail}"> 
+	</p>
+	
+	<p>ニックネーム<br>
+		<input type="text" name="name" th:field="*{user_name}"> 
+	</p>
+	
+	<p>パスワード (半角数字6文字以上)<br>
+		<input type="text" name="pass" th:field="*{pass}"> 
+	</p>
+	
+	<input type="submit" value="アカウント作成">
+</form>
+
+</body>
+</html>

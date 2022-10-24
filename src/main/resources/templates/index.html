@@ -15,9 +15,17 @@
 	<p>パスワード (半角数字6文字以上)<br>
 		<input type="text" name="pass" th:field="*{pass}"> 
 	</p>
+	<ul th:if="${#fields.hasErrors('*')}">
+		<li th:each="err:${#fields.errors('*')}" th:text="${err}"></li>
+	</ul>
 	
-	<input type="submit" value="完了">
+	<input type="submit" name="com" value="完了">
+	<input type="submit" name="" value="パスワードを忘れた場合">
+	<input type="submit" name="new" value="新規登録">
+	
 </form>
+
+
 
 </body>
 </html>
