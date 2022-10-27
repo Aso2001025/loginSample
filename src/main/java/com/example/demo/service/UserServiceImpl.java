@@ -3,6 +3,8 @@ package com.example.demo.service;
 import java.sql.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,14 +17,21 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	UserRepository repository;
 	
+	 @Autowired
+	  HttpSession session; 
+	
 	@Override
-	public Boolean find(String mail,String pass) {
-		List<User> list = repository.findByMail(mail);
-		
+	public List<User> find(String mail) {
+		return repository.findByMail(mail);
+	}
+	
+	@Override
+	public Boolean match(List<User> list,String pass) {
 		BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();
 		
 		if (bcpe.matches(pass, list.get(0).getPass())) {
-			
+			session.setAttribute("user_id", list.get(0).getUser_id());
+			session.setAttribute("user_name", list.get(0).getUser_name());
 			return true;
 		}
 		return false;

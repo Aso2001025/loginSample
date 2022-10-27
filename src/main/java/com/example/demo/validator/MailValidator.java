@@ -1,13 +1,20 @@
 package com.example.demo.validator;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import com.example.demo.entity.User;
 import com.example.demo.form.InputForm;
+import com.example.demo.service.UserService;
 
 @Component
-public class PassValidator implements Validator {
+public class MailValidator implements Validator {
+	@Autowired
+	UserService service;
 
 	@Override
 	public boolean supports(Class<?> clazz) {
@@ -19,8 +26,9 @@ public class PassValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		// TODO 自動生成されたメソッド・スタブ
 		InputForm form = (InputForm) target;
-		if(!form.getPass().equals(form.getComPass())) {
-			errors.reject("com.example.demo.validator.PassValidator.message");
+		List<User> list = service.find(form.getMail());
+		if(!list.isEmpty()) {
+			errors.reject("com.example.demo.validator.MailValidator.message");
 		}
 	}
 

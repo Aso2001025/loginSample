@@ -1,10 +1,13 @@
 package com.example.demo.service;
 import java.sql.Date;
+import java.util.List;
 
 import com.example.demo.entity.User;
 
 public interface UserService {
-	Boolean find(String mail,String pass);
+	List<User> find(String mail);
+	
+	Boolean match(List<User> list,String pass);
 	
 	void addUser(User user);
 	
