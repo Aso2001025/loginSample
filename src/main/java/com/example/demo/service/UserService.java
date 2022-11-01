@@ -1,14 +1,11 @@
 package com.example.demo.service;
 import java.sql.Date;
 import java.util.List;
-import java.util.Optional;
 
 import com.example.demo.entity.User;
 
 public interface UserService {
-	List<User> findMail(String mail);
-	
-	Optional<User> findId(Integer user_id);
+	List<User> find(String mail);
 	
 	Boolean match(List<User> list,String pass);
 	

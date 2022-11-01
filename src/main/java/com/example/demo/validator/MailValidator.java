@@ -26,7 +26,7 @@ public class MailValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		// TODO 自動生成されたメソッド・スタブ
 		InputForm form = (InputForm) target;
-		List<User> list = service.findMail(form.getMail());
+		List<User> list = service.find(form.getMail());
 		if(!list.isEmpty()) {
 			errors.reject("com.example.demo.validator.MailValidator.message");
 		}
