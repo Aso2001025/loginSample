@@ -1,6 +1,4 @@
 package com.example.demo.controller;
-import java.io.File;
-import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
@@ -17,12 +15,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.entity.User;
 import com.example.demo.form.InputForm;
-import com.example.demo.form.UpdateForm;
 import com.example.demo.form.UserForm;
 import com.example.demo.service.UserService;
 import com.example.demo.validator.MailValidator;
@@ -49,8 +44,6 @@ public class LoginController {
 	PassValidator passValidator;
 	@Autowired
 	MailValidator mailValidator;
-	@Autowired
-	UpdateForm updateForm;
 	
 	@InitBinder("inputForm")
 	public void initBinder(WebDataBinder webDataBinder) {
@@ -108,26 +101,6 @@ public class LoginController {
 		model.addAttribute("user",user.get());
 		
 		return "acount";
-	}
-	
-	@PostMapping(value="setting",params="update")
-	public String upload(@RequestParam MultipartFile file, Model model) {
-		if(file.isEmpty()) {
-			model.addAttribute("error", "ファイルを指定してください");
-			return "index";
-		}
-		File dest = new File(updateForm.getMFile(),"picture.jpg");
-		try {
-			file.transferTo(dest); //表示される修正候補の「try/catchで囲む」を選択
-		} catch (IllegalStateException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
-		return "acount";
-		
 	}
 	
 	

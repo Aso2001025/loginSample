@@ -5,7 +5,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form th:action="@{/settiog}" method="post" enctype="multipart/form-data" th:object="${updateForm}">
+<form th:action="@{/settiog}" method="post" th:object="${updateForm}">
 	<p>アイコン<br>
 	<input type="file" name="file" accept="image/*"></p>
 	

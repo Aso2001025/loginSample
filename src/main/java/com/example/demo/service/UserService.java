@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import com.example.demo.entity.User;
-import com.example.demo.form.UpdateForm;
 
 public interface UserService {
 	List<User> findMail(String mail);
@@ -18,6 +17,4 @@ public interface UserService {
 	String hash(String pass);
 	
 	Date getDate();
-	
-	UpdateForm appConfig();
 }

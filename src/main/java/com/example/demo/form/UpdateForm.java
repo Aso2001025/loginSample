@@ -7,8 +7,7 @@ import lombok.Data;
 @Data
 public class UpdateForm {
 
-	private File mFile;
+	private File icon;
 	private String mail;
 	private String user_name;
-	
 }
