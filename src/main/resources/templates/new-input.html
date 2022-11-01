@@ -2,30 +2,32 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Login</title>
+<title>Insert title here</title>
 </head>
 <body>
-
-<form th:action="@{/login}" method="post" th:object="${userForm}">
+<form th:action="@{/new}" method="post" th:object="${inputForm}">
 
 	<p>メールアドレス<br>
 		<input type="text" name="mail" th:field="*{mail}"> 
 	</p>
 	
+	<p>ニックネーム<br>
+		<input type="text" name="name" th:field="*{user_name}"> 
+	</p>
+	
 	<p>パスワード (半角数字6文字以上)<br>
 		<input type="text" name="pass" th:field="*{pass}"> 
+	</p>
+	
+	<p>確認用パスワード (半角数字6文字以上)<br>
+		<input type="text" name="pass" th:field="*{comPass}"> 
 	</p>
 	<ul th:if="${#fields.hasErrors('*')}">
 		<li th:each="err:${#fields.errors('*')}" th:text="${err}"></li>
 	</ul>
 	
-	<input type="submit" name="com" value="完了">
-	<input type="submit" name="" value="パスワードを忘れた場合">
-	<input type="submit" name="new" value="新規登録">
-	
+	<input type="submit" value="アカウント作成">
 </form>
-
-
 
 </body>
 </html>

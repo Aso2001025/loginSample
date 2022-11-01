@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form th:action="@{/settiog}" method="post" enctype="multipart/form-data" th:object="${updateForm}">
+	<p>アイコン<br>
+	<input type="file" name="file" accept="image/*"></p>
+	
+	<p>メールアドレス<br> 
+	<input type="text" th:value="${user.mail}" name="mail" ></p>
+	
+	<p>ユーザーネーム<br>
+	<input type="text" th:value="${user.user_name}" name="user_name" ></p>
+	
+
+	<input type="submit" name="update" value="変更">
+	<input type="submit" name="logout" value="ログアウト">
+</form>
+
+
+</body>
+</html>
