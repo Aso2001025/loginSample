@@ -1,14 +1,17 @@
 package com.example.demo.service;
 
+import java.io.File;
 import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.User;
+import com.example.demo.form.UpdateForm;
 import com.example.demo.repository.UserRepository;
 
 @Service
@@ -56,5 +59,21 @@ public class UserServiceImpl implements UserService {
 		
 		return date;
 		
+	}
+	
+	@Bean//@Beanアノテーションを付けたメソッドを定義しておくことでSpring Frameworkがオブジェクトを登録して後で使える
+	public UpdateForm appConfig() {
+		
+		// 起動時のディレクトリをAppConfigのimageDirフィールドに保持しておく
+		File imageDir = new File("images");
+		imageDir = imageDir.getAbsoluteFile();
+		
+		// imagesフォルダがなかったら作成する
+		if(!imageDir.exists()) {
+			imageDir.mkdir();
+		}
+		UpdateForm appConfig = new UpdateForm();
+		appConfig.setMFile(imageDir);
+		return appConfig;
 	}
 }
