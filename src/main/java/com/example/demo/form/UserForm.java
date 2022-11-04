@@ -6,4 +6,5 @@ import lombok.Data;
 public class UserForm {
 	private String mail;
 	private String pass;
+	private String user_name;
 }

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<p>現在のアイコン<br>
+	<img th:src="*{user.icon}">
+</p>
+<form th:action="@{/updateIcon}" th:object="${updateForm}" method="post" >
+	<p>新しいアイコン<br>
+		<input type="file" th:field="*{icon}" name="icon" >
+	</p>
+	<input type="submit" value="完了">
+</form>
+</body>
+</html>

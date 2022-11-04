@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.entity.User;
 import com.example.demo.form.InputForm;
+import com.example.demo.form.UpdateForm;
 import com.example.demo.form.UserForm;
 import com.example.demo.service.UserService;
 import com.example.demo.validator.MailValidator;
@@ -35,6 +36,11 @@ public class LoginController {
 	@ModelAttribute
 	public InputForm InputSetUpForm() {
 		return new InputForm();
+	}
+	
+	@ModelAttribute
+	public UpdateForm UpdateSetUpForm() {
+		return new UpdateForm();
 	}
 	
 	@Autowired
@@ -66,7 +72,7 @@ public class LoginController {
 			return "index";
 		}
 		List<User> list = service.findMail(f.getMail());
-		if(service.match(list, f.getPass())) {
+		if(!list.isEmpty() && service.match(list, f.getPass())) {
 			session.setAttribute("user_id", list.get(0).getUser_id());
 			session.setAttribute("user_name", list.get(0).getUser_name());
 			return "login-ok";
@@ -89,7 +95,7 @@ public class LoginController {
 		}
 		String hash = service.hash(f.getPass());
 		Date date = service.getDate();
-		User user = new User(null,f.getUser_name(),null,f.getMail(),hash,0,null,date);
+		User user = new User(null,f.getUser_name(),null,f.getMail(),hash,date);
 
 		service.addUser(user);
 		return "new-confirm";
@@ -102,6 +108,65 @@ public class LoginController {
 		
 		return "acount";
 	}
+	
+	
+	@PostMapping(value="update",params="icon")
+	 public String updateIconView(Model model) {
+		Optional<User> user = service.findId((Integer) session.getAttribute("user_id"));
+		model.addAttribute(user.get());
+		 return "updateIcon";
+	 }
+	
+	 @PostMapping(value="update",params="mail")
+	 public String updateMailView(Model model) {
+		Optional<User> user = service.findId((Integer) session.getAttribute("user_id"));
+		model.addAttribute(user.get());
+		return "updateMail";
+	 }
+	 
+	 @PostMapping(value="update",params="user_name")
+	 public String updateNameView(Model model) {
+		Optional<User> user = service.findId((Integer) session.getAttribute("user_id"));
+		model.addAttribute(user.get());
+		return "updateName";
+	 }
+	 
+	 @PostMapping(value="update",params="logout")
+	 public String logput() {
+		
+		 return "index";
+	 }
+	 
+	 
+	 
+	 @PostMapping("updateMail")
+	 public String updateMail(UpdateForm f,Model model) {
+		 System.out.println(f.getMail());
+		 service.updateMail(f.getMail(),(Integer)session.getAttribute("user_id"));
+		 Optional<User> user = service.findId((Integer) session.getAttribute("user_id"));
+		 model.addAttribute("user",user.get());
+		 return "acount";
+	 }
+	 
+	 @PostMapping("updateName")
+	 public String updateName(UpdateForm f,Model model) {
+		 service.updateName(f.getUser_name(),(Integer)session.getAttribute("user_id"));
+		 Optional<User> user = service.findId((Integer) session.getAttribute("user_id"));
+		 model.addAttribute("user",user.get());
+		 
+		 return "acount";
+	 }
+	 
+	 
+	 @PostMapping("updateIcon")
+	 public String updateIcon(UpdateForm f,Model model) {
+		 service.updateName(f.getUser_name(),(Integer)session.getAttribute("user_id"));
+		 Optional<User> user = service.findId((Integer) session.getAttribute("user_id"));
+		 model.addAttribute("user",user.get());
+		 
+		 return "acount";
+	 }
+	 
 	
 	
 }

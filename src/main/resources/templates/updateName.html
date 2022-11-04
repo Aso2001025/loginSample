@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<p>現在のユーザーネーム<br>
+	[[${user.user_name}]]
+</p>
+<form th:action="@{/updateName}" th:object="${updateForm}" method="post" >
+	<p>新しいユーザネーム<br>
+		<input type="text" th:field="*{user_name}" name="user_name">
+	</p>
+	<input type="submit" value="完了">
+</form>
+</body>
+</html>
