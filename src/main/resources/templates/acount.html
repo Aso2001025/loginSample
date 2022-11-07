@@ -7,7 +7,7 @@
 <body>
 <form th:action="@{/update}" method="post" >
 	<p>アイコン<br>
-	<img th:src="@{/img/defo.png}">
+	<img th:src="*{user.icon}">
 	<input type="image" src="button.png" name="icon" >
 	</p>
 	<p>メールアドレス<br> 

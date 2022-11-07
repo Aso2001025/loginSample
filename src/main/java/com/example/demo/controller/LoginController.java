@@ -160,7 +160,10 @@ public class LoginController {
 	 
 	 @PostMapping("updateIcon")
 	 public String updateIcon(UpdateForm f,Model model) {
-		 service.updateName(f.getUser_name(),(Integer)session.getAttribute("user_id"));
+		 System.out.println(f);
+		 String path = service.uploadAction(f.getIcon());
+		 
+		 service.updateIcon(path,(Integer)session.getAttribute("user_id"));
 		 Optional<User> user = service.findId((Integer) session.getAttribute("user_id"));
 		 model.addAttribute("user",user.get());
 		 

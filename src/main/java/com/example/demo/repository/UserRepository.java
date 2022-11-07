@@ -21,4 +21,7 @@ public interface UserRepository extends CrudRepository<User,Integer>{
 	@Modifying
 	@Query("update User set user_name = :user_name where user_id = :id")
 	void setName(@Param("user_name") String user_name,@Param("id") Integer user_id);
+	@Modifying
+	@Query("update User set icon = :icon where user_id = :id")
+	void setIcon(@Param("icon") String icon,@Param("id") Integer user_id);
 }

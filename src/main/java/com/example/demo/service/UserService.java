@@ -26,5 +26,7 @@ public interface UserService {
 	void updateMail(String mail,Integer user_id);
 	
 	void updateName(String user_name,Integer user_id);
+
+	void updateIcon(String path,Integer user_id);
 	
 }
