@@ -35,8 +35,12 @@ out/
 
 ### VS Code ###
 .vscode/
+<<<<<<< Updated upstream
 src/main/java/.DS_Store
 .DS_Store
 src/main/java/com/.DS_Store
 src/main/.DS_Store
 src/.DS_Store
+=======
+gradle/.DS_Store
+>>>>>>> Stashed changes
