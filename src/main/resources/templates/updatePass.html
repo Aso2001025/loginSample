@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+<form th:action="@{/updatePass}" th:object="${passForm}" method="post" >
+	
+	<p>現在のパスワード<br>
+		<input type="password" name="oldPass" th:field="*{oldPass}">
+	</p>
+	<p>新しいパスワード<br>
+		<input type="password" name="newPass"  th:field="*{newPass}">
+	</p>
+	<p>確認用パスワード<br>
+		<input type="password" name="comPass" th:field="*{comPass}"> 
+	</p>
+	<th:block th:if="${msg} != null">
+		[[${msg}]]
+	</th:block>
+	<ul th:if="${#fields.hasErrors('*')}">
+		<li th:each="err:${#fields.errors('*')}" th:text="${err}"></li>
+	</ul>
+	<input type="submit" value="完了">
+</form>
+</body>
+</html>

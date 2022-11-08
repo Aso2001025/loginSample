@@ -14,14 +14,22 @@ import com.example.demo.entity.User;
 @Transactional
 @Repository
 public interface UserRepository extends CrudRepository<User,Integer>{
+	//メールでユーザー検索
 	List<User> findByMail(String mail);
+	//メール更新
 	@Modifying
 	@Query("update User set mail = :mail where user_id = :id")
 	void setMail(@Param("mail") String mail,@Param("id") Integer user_id);
+	//ユーザーネーム更新
 	@Modifying
 	@Query("update User set user_name = :user_name where user_id = :id")
 	void setName(@Param("user_name") String user_name,@Param("id") Integer user_id);
+	//アイコン更新
 	@Modifying
 	@Query("update User set icon = :icon where user_id = :id")
 	void setIcon(@Param("icon") String icon,@Param("id") Integer user_id);
+	//パスワード更新
+	@Modifying
+	@Query("update User set pass = :pass where user_id = :id")
+	void setPass(@Param("pass") String pass,@Param("id") Integer user_id);
 }

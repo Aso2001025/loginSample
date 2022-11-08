@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.example.demo.entity.User;
 import com.example.demo.form.InputForm;
+import com.example.demo.form.PassForm;
 import com.example.demo.form.UpdateForm;
 import com.example.demo.form.UserForm;
 import com.example.demo.service.UserService;
@@ -41,6 +43,11 @@ public class LoginController {
 	@ModelAttribute
 	public UpdateForm UpdateSetUpForm() {
 		return new UpdateForm();
+	}
+	
+	@ModelAttribute
+	public PassForm PassSetUpForm() {
+		return new PassForm();
 	}
 	
 	@Autowired
@@ -72,7 +79,7 @@ public class LoginController {
 			return "index";
 		}
 		List<User> list = service.findMail(f.getMail());
-		if(!list.isEmpty() && service.match(list, f.getPass())) {
+		if(!list.isEmpty() && service.match(list.get(0).getPass(), f.getPass())) {
 			session.setAttribute("user_id", list.get(0).getUser_id());
 			session.setAttribute("user_name", list.get(0).getUser_name());
 			return "login-ok";
@@ -131,9 +138,16 @@ public class LoginController {
 		return "updateName";
 	 }
 	 
+	 @PostMapping(value="update",params="pass")
+	 public String UpdatePassView() {
+		 return "updatePass";
+	 }
 	 @PostMapping(value="update",params="logout")
-	 public String logput() {
-		
+	 public String logput(SessionStatus sessionStatus) {
+		 session.removeAttribute("user_id");
+		 session.removeAttribute("user_name");
+		 session.invalidate();
+		 sessionStatus.setComplete();
 		 return "index";
 	 }
 	 
@@ -160,7 +174,6 @@ public class LoginController {
 	 
 	 @PostMapping("updateIcon")
 	 public String updateIcon(UpdateForm f,Model model) {
-		 System.out.println(f);
 		 String path = service.uploadAction(f.getIcon());
 		 
 		 service.updateIcon(path,(Integer)session.getAttribute("user_id"));
@@ -168,6 +181,25 @@ public class LoginController {
 		 model.addAttribute("user",user.get());
 		 
 		 return "acount";
+	 }
+	 
+	 @PostMapping("updatePass")
+	 public String updateIcon(PassForm f,Model model) {
+		Optional<User> list = service.findId((Integer) session.getAttribute("user_id"));
+		if(service.match(list.get().getPass(), f.getOldPass())) {
+			String hash = service.hash(f.getNewPass());
+			System.out.println(service.hash(f.getOldPass()));
+			System.out.println(hash);
+			System.out.println(service.hash(f.getNewPass()));
+			service.updatePass(hash,(Integer)session.getAttribute("user_id"));
+			Optional<User> user = service.findId((Integer) session.getAttribute("user_id"));
+			model.addAttribute("user",user.get());
+			return "acount";
+		}else {
+			model.addAttribute("msg","現在のパスワードが違います");
+			return "updatePass";
+		}
+		 
 	 }
 	 
 	

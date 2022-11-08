@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+//ユーザーテーブル
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

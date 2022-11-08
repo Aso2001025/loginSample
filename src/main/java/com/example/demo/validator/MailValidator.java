@@ -10,7 +10,7 @@ import org.springframework.validation.Validator;
 import com.example.demo.entity.User;
 import com.example.demo.form.InputForm;
 import com.example.demo.service.UserService;
-
+//メールのバリデーション
 @Component
 public class MailValidator implements Validator {
 	@Autowired
@@ -25,8 +25,11 @@ public class MailValidator implements Validator {
 	@Override
 	public void validate(Object target, Errors errors) {
 		// TODO 自動生成されたメソッド・スタブ
+		//対象のフォームの取得
 		InputForm form = (InputForm) target;
+		//メールの検索
 		List<User> list = service.findMail(form.getMail());
+		//メールがすでに登録されている場合
 		if(!list.isEmpty()) {
 			errors.reject("com.example.demo.validator.MailValidator.message");
 		}
