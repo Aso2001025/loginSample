@@ -61,3 +61,8 @@ out/
 .metadata/.plugins/org.eclipse.ui.workbench/dialog_settings.xml
 .metadata/.plugins/org.eclipse.ui.workbench/workingsets.xml
 .metadata/version.ini
+src/main/java/.DS_Store
+.DS_Store
+src/main/java/com/.DS_Store
+src/main/.DS_Store
+src/.DS_Store

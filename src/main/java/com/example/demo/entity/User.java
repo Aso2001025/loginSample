@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+//ユーザーテーブル
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,7 +20,5 @@ public class User {
 	private String icon;
 	private String mail;
 	private String pass;
-	private Integer level;
-	private Date birthday;
 	private Date reg_date;
 }

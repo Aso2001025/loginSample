@@ -20,7 +20,7 @@
 	</p>
 	
 	<p>確認用パスワード (半角数字6文字以上)<br>
-		<input type="text" name="pass" th:field="*{comPass}"> 
+		<input type="text" name="comPass" th:field="*{comPass}"> 
 	</p>
 	<ul th:if="${#fields.hasErrors('*')}">
 		<li th:each="err:${#fields.errors('*')}" th:text="${err}"></li>
